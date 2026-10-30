@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Console.AI - Portafolio</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f9; }
+    .seccion { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    h1 { color: #232f3e; }
+    /* El botón secreto */
+    #boton-magico { position: fixed; bottom: 20px; right: 20px; padding: 15px 25px; background: #ff9900; color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 16px; }
+    /* La terminal oculta */
+    #terminal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1e1e1e; color: #00ff00; font-family: monospace; padding: 20px; box-sizing: border-box; overflow-y: auto; }
+    #input-terminal { background: transparent; color: #00ff00; border: none; font-family: monospace; font-size: 16px; width: 80%; outline: none; }
+  </style>
+</head>
+<body>
+  <!-- Tu web normal -->
+  <div id="web-normal">
+    <h1>Mi Portafolio AWS</h1>
+    <div class="seccion">
+      <h2>Sobre Mí</h2>
+      <p>Hola, soy estudiante en España. Estoy aprendiendo AWS y cómo conectar Inteligencia Artificial a mis proyectos.</p>
+    </div>
+    <div class="seccion">
+      <h2>Mis Habilidades (Superpoderes)</h2>
+      <p>⭐ AWS Amplify<br>⭐ Amazon Bedrock (Conceptos)<br>⭐ HTML y CSS</p>
+    </div>
+    <div class="seccion">
+      <h2>Proyectos</h2>
+      <p>Actualmente participando en el AWS Student Builder Challenge con este portafolio interactivo.</p>
+    </div>
+    <!-- Pista para el jurado -->
+    <button id="boton-magico" onclick="abrirTerminal()">💻 Activar IA</button>
+  </div>
+
+  <!-- Tu terminal secreta -->
+  <div id="terminal">
+    <p>Iniciando Console.AI...</p>
+    <p>Conexión establecida. Escribe un comando: <b>sobre_mi</b>, <b>habilidades</b> o <b>salir</b>.</p>
+    <div id="salida-terminal"></div>
+    <span>AWS-User@Portafolio:~$ </span>
+    <input type="text" id="input-terminal" onkeypress="leerComando(event)" autocomplete="off">
+  </div>
+
+  <script>
+    // Esto hace que la terminal aparezca
+    function abrirTerminal() {
+      document.getElementById('web-normal').style.display = 'none';
+      document.getElementById('terminal').style.display = 'block';
+      setTimeout(() => document.getElementById('input-terminal').focus(), 100);
+    }
+
+    // Esto simula que la IA te responde
+    function leerComando(event) {
+      if (event.key === 'Enter') {
+        let comando = document.getElementById('input-terminal').value.toLowerCase();
+        let respuesta = "";
+        
+        if (comando === "sobre_mi") {
+          respuesta = "Soy un estudiante apasionado por la nube, listo para ganar el hackathon de AWS.";
+        } else if (comando === "habilidades") {
+          respuesta = "Mis sistemas detectan altos niveles de conocimiento en AWS Amplify e IA Generativa.";
+        } else if (comando === "salir") {
+          document.getElementById('web-normal').style.display = 'block';
+          document.getElementById('terminal').style.display = 'none';
+          document.getElementById('input-terminal').value = "";
+          return; // Sale de la función sin imprimir nada
+        } else {
+          respuesta = "Comando no reconocido. Prueba con: sobre_mi, habilidades, salir.";
+        }
+
+        // Muestra lo que escribiste y la respuesta
+        let pantalla = document.getElementById('salida-terminal');
+        pantalla.innerHTML += "<br>AWS-User@Portafolio:~$ " + comando + "<br>" + respuesta + "<br>";
+        
+        // Limpia la caja de texto
+        document.getElementById('input-terminal').value = "";
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+    }
+  </script>
+</body>
+</html>
